@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+  --background-color: #2b2d33;
+  --titanic-quest-blue: #283380FF;
+  --titanic-quest-yellow: #ffcc00f7;
+  --titanic-quest-red: #de0505;
+
+  background-color: var(--background-color) !important;
+}
