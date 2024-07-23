@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Pagination} from "../../model/pagination/Pagination";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PaginationService} from "../../service/pagination/PaginationService";
+import {Filters} from "../../model/filter/Filters";
 
 @Component({
   selector: 'app-pagination',
@@ -16,6 +17,7 @@ export class PaginationComponent implements OnInit{
   @Input() url!: string;
   @Output() pageChanged = new EventEmitter <number>();
   searchRequest: string = '';
+  @Input() filters!: Filters;
 
   constructor(private router: Router,
               private paginationService: PaginationService,
@@ -30,14 +32,16 @@ export class PaginationComponent implements OnInit{
     else
       this.searchRequest = param;
 
-    this.paginationService.getPagination(this.url, this.searchRequest, this.activePage.number)
+    this.paginationService.getPagination(this.url, this.searchRequest,
+      this.activePage.number, this.filters)
       .subscribe(value => {
       this.pagination = value.pagination;
       if(this.pagination.length > 0) {
         if (this.activePage.number > this.pagination[this.pagination.length - 1].number) {
           this.activePage.number = this.pagination[this.pagination.length - 1].number;
-          this.router.navigate([], {queryParams: {page: this.activePage.number}, queryParamsHandling: 'merge'});
         }
+        this.router.navigate([], {queryParams: {page: this.activePage.number}, queryParamsHandling: 'merge'});
+        this.pageChanged.emit(this.activePage.number);
       }
     })
   }
