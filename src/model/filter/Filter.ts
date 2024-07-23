@@ -8,7 +8,7 @@ export class Filter {
   active: boolean = false;
 
   constructor(field: string, condition: string, value: string, logicalRelation: string,
-              title: string) {
+              title: string = '') {
     this.field = field;
     this.condition = condition;
     this.value = value;
