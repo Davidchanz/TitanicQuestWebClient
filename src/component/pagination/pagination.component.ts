@@ -14,7 +14,6 @@ export class PaginationComponent implements OnInit{
   pagination?: Array<Pagination>;
   @Input() activePage!: Pagination;
   @Input() url!: string;
-  @Input() navigateUrl!: string;
   @Output() pageChanged = new EventEmitter <number>();
   searchRequest: string = '';
 
@@ -37,7 +36,7 @@ export class PaginationComponent implements OnInit{
       if(this.pagination.length > 0) {
         if (this.activePage.number > this.pagination[this.pagination.length - 1].number) {
           this.activePage.number = this.pagination[this.pagination.length - 1].number;
-          this.router.navigate([this.navigateUrl], {queryParams: {page: this.activePage.number}, queryParamsHandling: 'merge'});
+          this.router.navigate([], {queryParams: {page: this.activePage.number}, queryParamsHandling: 'merge'});
         }
       }
     })
@@ -60,7 +59,7 @@ export class PaginationComponent implements OnInit{
 
   changePage(page: number){
     this.activePage.number = page
-    this.router.navigate([this.navigateUrl], { queryParams: {page: this.activePage.number}, queryParamsHandling: 'merge' });
+    this.router.navigate([], { queryParams: {page: this.activePage.number}, queryParamsHandling: 'merge' });
     this.pageChanged.emit(page);
     this.getPagination();
   }

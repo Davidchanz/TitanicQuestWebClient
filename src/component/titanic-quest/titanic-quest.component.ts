@@ -4,33 +4,31 @@ import {PassengerService} from "../../service/passenger/PassengerService";
 import {PaginationComponent} from "../pagination/pagination.component";
 import {Pagination} from "../../model/pagination/Pagination";
 import {ActivatedRoute} from "@angular/router";
+import {SortPageSearchBasic} from "../SortPageSearchBasic";
+import {SortingComponent} from "../sorting/sorting.component";
 
 @Component({
   selector: 'app-titanic-quest',
   standalone: true,
   imports: [
-    PaginationComponent
+    PaginationComponent,
+    SortingComponent
   ],
   templateUrl: './titanic-quest.component.html',
   styleUrl: './titanic-quest.component.css'
 })
-export class TitanicQuestComponent {
+export class TitanicQuestComponent extends SortPageSearchBasic{
   passengers?: Passengers
-  pagination: Pagination
 
   constructor(private passengerService: PassengerService,
-              public route: ActivatedRoute) {
-    const page = this.route.snapshot.queryParams['page'];
-    if(page == null)
-      this.pagination = new Pagination(1);
-    else
-      this.pagination = new Pagination(page);
+              public override route: ActivatedRoute) {
+    super(route)
 
-    this.getPassengers()
+    this.getItems()
   }
 
-  getPassengers(){
-    this.passengerService.getPassengers(this.pagination.number, 50, "id", "ASC", "")
+  getItems(){
+    this.passengerService.getPassengers(this.pagination, 50, this.sorting, this.searchRequest)
       .subscribe(value => {
         this.passengers = value
       })
