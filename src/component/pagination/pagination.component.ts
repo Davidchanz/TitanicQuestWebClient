@@ -25,7 +25,7 @@ export class PaginationComponent implements OnInit{
 
   }
 
-  getPagination(){
+  getPagination(after: () => void = ()=>{}){
     const param = this.route.snapshot.queryParams['searchRequest'];
     if(param == null)
       this.searchRequest = "";
@@ -41,8 +41,8 @@ export class PaginationComponent implements OnInit{
           this.activePage.number = this.pagination[this.pagination.length - 1].number;
         }
         this.router.navigate([], {queryParams: {page: this.activePage.number}, queryParamsHandling: 'merge'});
-        this.pageChanged.emit(this.activePage.number);
       }
+      after();
     })
   }
 

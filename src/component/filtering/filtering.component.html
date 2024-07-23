@@ -1,4 +1,4 @@
-<div class="d-flex flex-row gap-3 p-3 col-12 text-white table-dark filtering">
+<div class="d-flex flex-lg-row flex-column gap-3 p-3 col-12 text-white table-dark filtering">
   @for(filterBox of filterCheckBoxes; track filterBox){
     <div class="form-check">
       <input (change)="setCheck(filterBox)" [(ngModel)]="filterBox.active" class="form-check-input" type="checkbox" value="" id="{{filterBox.title}}" [checked]="filterBox.active">
