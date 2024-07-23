@@ -2,5 +2,5 @@ import { Routes } from '@angular/router';
 import {TitanicQuestComponent} from "../component/titanic-quest/titanic-quest.component";
 
 export const routes: Routes = [
-  {path: '', component: TitanicQuestComponent},
+  {path: 'passengers', component: TitanicQuestComponent},
 ];
