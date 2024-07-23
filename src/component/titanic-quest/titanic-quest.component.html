@@ -8,12 +8,12 @@
           <th scope="col">#</th>
           <th scope="col" class="align-middle text-center">Survived</th>
           <th scope="col" class="align-middle text-center">PClass</th>
-          <th scope="col" class="align-middle text-center">Name</th>
+          <th scope="col" class="align-middle text-center"><app-sorting [url]="'passengers'" [title]="'Name'" [by]="'name'" [sort]="sorting" (sortChanged)="getItems()"></app-sorting></th>
           <th scope="col" class="align-middle text-center">Sex</th>
-          <th scope="col" class="align-middle text-center">Age</th>
+          <th scope="col" class="align-middle text-center"><app-sorting [url]="'passengers'" [title]="'Age'" [by]="'age'" [sort]="sorting" (sortChanged)="getItems()"></app-sorting></th>
           <th scope="col" class="align-middle text-center">Siblings/Spouses Aboard</th>
           <th scope="col" class="align-middle text-center">Parents/Children Aboard</th>
-          <th scope="col" class="align-middle text-center">Fare</th>
+          <th scope="col" class="align-middle text-center"><app-sorting [url]="'passengers'" [title]="'Fare'" [by]="'fare'" [sort]="sorting" (sortChanged)="getItems()"></app-sorting></th>
         </tr>
         </thead>
         <tbody>
@@ -47,7 +47,7 @@
           }
         </tbody>
       </table>
-      <app-pagination (pageChanged)="getPassengers()" [url]="'passengers'" [navigateUrl]="''" [activePage]="pagination"></app-pagination>
+      <app-pagination (pageChanged)="getItems()" [url]="'passengers'" [activePage]="pagination"></app-pagination>
     </div>
   </div>
 </div>
