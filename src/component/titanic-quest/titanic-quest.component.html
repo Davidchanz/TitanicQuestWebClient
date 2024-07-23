@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-          @for(passenger of passengers?.passengers; track passenger; let index = $index){
+          @for(passenger of passengers?.passengers; track passenger.id; let index = $index){
             <tr>
               <th class="align-middle text-center" scope="row">{{index+1}}</th>
               <td class="align-middle text-center">
@@ -47,6 +47,7 @@
           }
         </tbody>
       </table>
+      <app-pagination (pageChanged)="getPassengers()" [url]="'passengers'" [navigateUrl]="''" [activePage]="pagination"></app-pagination>
     </div>
   </div>
 </div>
