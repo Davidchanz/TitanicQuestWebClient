@@ -47,7 +47,15 @@
           }
         </tbody>
       </table>
-      <app-pagination (pageChanged)="getItems()" [url]="'passengers'" [activePage]="pagination"></app-pagination>
+      <app-pagination (pageChanged)="getItems()" [filters]="filters" [url]="'passengers'" [activePage]="pagination"></app-pagination>
+      <div class="d-flex flex-row p-3">
+        <div class="d-flex col-6">
+
+        </div>
+        <div class="d-flex col-6">
+          <app-filtering (filterChanged)="filtering()" [filters]="filters"></app-filtering>
+        </div>
+      </div>
     </div>
   </div>
 </div>

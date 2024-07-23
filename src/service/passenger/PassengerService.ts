@@ -5,13 +5,14 @@ import {HttpResponseService} from "../http/HttpResponseService";
 import {HttpHeaders, HttpParams} from "@angular/common/http";
 import {Pagination} from "../../model/pagination/Pagination";
 import {Sort} from "../../model/sorting/Sort";
+import {Filters} from "../../model/filter/Filters";
 
 @Injectable({
   providedIn: "root",
 })
 export class PassengerService extends HttpRequestService{
 
-  getPassengers(page: Pagination, pageSize: number, sorting: Sort, searchRequest: string = ''){
+  getPassengers(page: Pagination, pageSize: number, sorting: Sort, searchRequest: string = '', filters: Filters){
     const options = {
       params: new HttpParams()
         .set('page', page.number)
@@ -20,7 +21,9 @@ export class PassengerService extends HttpRequestService{
         .set('order', sorting.order)
         .set('searchRequest', searchRequest)};
 
-    return new HttpResponseService(this.http.post<Passengers>(`${this.host}${this.port}/api/passengers`, {}, options));
+    let activeFilters = new Filters(filters.filters.filter(filter => filter.active))
+
+    return new HttpResponseService(this.http.post<Passengers>(`${this.host}${this.port}/api/passengers`, activeFilters, options));
   }
 
 }
