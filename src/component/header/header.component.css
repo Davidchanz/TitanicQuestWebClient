@@ -1,0 +1,41 @@
+.header {
+  border-bottom: 1px solid #000000;
+  padding-bottom: 2%;
+}
+
+.search-bar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.searchDiv :focus{
+  outline: none;
+}
+
+.gn-dropdown-bar {
+  width: 100%;
+}
+
+.gn-dropdown {
+  border-radius: 10px;
+  position: relative;
+  display: none;
+  flex-direction: column;
+  padding: 10px;
+  background-color: var(--bs-white);
+  z-index: 1000;
+}
+.gn-dropdown a {
+  display: block;
+  padding: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.gn-dropdown a:hover {
+  color: var(--bs-white);
+  background-color: rgb(51, 51, 51);
+}

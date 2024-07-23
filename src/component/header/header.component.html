@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="/assets/image/logo.png" height="100vh">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="passengers">Passengers</a>
+        </li>
+      </ul>
+      <div class="search-bar position-relative">
+        <form class="d-flex flex-row position-relative searchDiv" style="max-height: 37px;">
+          <div class="d-flex flex-column position-relative searchDiv">
+            <input class="form-control" type="search" [(ngModel)]="searchRequest" (blur)="hideSearch()" (input)="searchType()" (click)="searchType()" name="searchRequest" placeholder="Search" aria-label="Search">
+            <div class="gn-dropdown-bar position-relative">
+              <div #dropdown class="gn-dropdown" [style.display]="searchResults.results.length >= 1 ? 'flex': 'none'">
+                @if (searchResults.results.length >= 1){
+                  @for (resultItem of searchResults.results; track searchResults){
+                    <a (click)="onSearchItemClick(resultItem.result)" text="{{resultItem.result}}"></a>
+                  }
+                }
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-outline-light" type="submit" (submit)="onSearchClick()" (click)="onSearchClick()">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
