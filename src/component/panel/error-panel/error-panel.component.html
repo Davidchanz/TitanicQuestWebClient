@@ -1,0 +1,6 @@
+<div [@error]="error" (click)="hide()" id="error-label" class="error-label p-3 d-flex flex-column flex-lg-row flex-md-row col-12">
+  <div style="width: 100vw" class="col-lg-6 col-md-6 col-12 d-flex flex-column flex-wrap">
+    <h2>O-o-o-p-s-y something went wrong!</h2>
+    <p style="white-space: pre-wrap;" id="error-description">{{state.message}}</p>
+  </div>
+</div>
