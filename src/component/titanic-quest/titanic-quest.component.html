@@ -1,0 +1,62 @@
+<div class="d-flex flex-column col-12">
+  <h2 class="text-white text-center">Titanic Passengers</h2>
+  <table class="table table-dark table-striped table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" class="align-middle text-center">Survived</th>
+      <th scope="col" class="align-middle text-center">PClass</th>
+      <th scope="col" class="align-middle text-center"><app-sorting [url]="'passengers'" [title]="'Name'" [by]="'name'" [sort]="sorting" (sortChanged)="getItems()"></app-sorting></th>
+      <th scope="col" class="align-middle text-center">Sex</th>
+      <th scope="col" class="align-middle text-center"><app-sorting [url]="'passengers'" [title]="'Age'" [by]="'age'" [sort]="sorting" (sortChanged)="getItems()"></app-sorting></th>
+      <th scope="col" class="align-middle text-center">Siblings/Spouses Aboard</th>
+      <th scope="col" class="align-middle text-center">Parents/Children Aboard</th>
+      <th scope="col" class="align-middle text-center"><app-sorting [url]="'passengers'" [title]="'Fare'" [by]="'fare'" [sort]="sorting" (sortChanged)="getItems()"></app-sorting></th>
+    </tr>
+    </thead>
+    <tbody>
+      @for(passenger of passengers?.passengers; track passenger.id; let index = $index){
+        <tr>
+          <th class="align-middle text-center" scope="row">{{index+1}}</th>
+          <td class="align-middle text-center">
+            <span class="text-white">{{passenger.survived}}</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-white">{{passenger.pClass}}</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-white">{{passenger.name}}</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-white">{{passenger.sex}}</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-white">{{passenger.age}}</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-white">{{passenger.siblingsSpouses}}</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-white">{{passenger.parentsChildren}}</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-white">{{passenger.fare}}</span>
+          </td>
+      }
+    </tbody>
+  </table>
+  <app-pagination (pageChanged)="getItems()" [filters]="filters" [url]="'passengers'" [activePage]="pagination"></app-pagination>
+  <div class="d-flex col-12 flex-row mt-3 gap-2">
+    <div class="d-flex flex-lg-row flex-column table-dark statistics">
+      @for(statistic of statistics.statistics; track statistic){
+        <app-statistic [url]="'passengers'" [filters]="filters" [statistic]="statistic"></app-statistic>
+      }
+    </div>
+    <div class="d-flex">
+      <app-filtering (filterChanged)="filtering()" [filters]="filters"></app-filtering>
+    </div>
+    <div class="d-flex h-100">
+      <input (change)="changePageSize()" class="form-control" appNumberSpinEdit [(ngModel)]="pageSize" type="number" max="1000" min="1">
+    </div>
+  </div>
+</div>

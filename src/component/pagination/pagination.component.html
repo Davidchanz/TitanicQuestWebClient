@@ -1,0 +1,11 @@
+<div id="pagination">
+  <span class="pointer" (click)="onPrevPage()" id="prev-page">&laquo;</span>
+  @for (page of pagination; track page.number;){
+    @if(page.active){
+      <span class="pointer page active">{{page.number}}</span>
+    } @else {
+      <span class="pointer page" (click)="onPage(page.number)">{{page.number}}</span>
+    }
+  }
+  <span class="pointer" (click)="onNextPage()" id="next-page">&raquo;</span>
+</div>

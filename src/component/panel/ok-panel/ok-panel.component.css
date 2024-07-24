@@ -1,0 +1,25 @@
+.ok-label{
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10000;
+  background-color: var(--bs-green);
+  color: var(--bs-white);
+  padding: 1%;
+  text-align: center;
+  transform: translateY(-110%);
+  min-width: max-content;
+  min-height: fit-content;
+}
+
+.ok-label span {
+  font-size: 1.5rem;
+  text-wrap: balance;
+  word-break: break-word;
+}
+
+.ok-label p {
+  margin: 0;
+  font-size: 1rem;
+}
+

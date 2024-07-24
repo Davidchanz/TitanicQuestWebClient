@@ -1,0 +1,4 @@
+<div class="d-flex flex-row gap-1 align-items-center pointer" (click)="sorting()">
+  <span>{{title}}</span>
+  <a [style.display]="(sort.by == by?'inline':'none')" [style.transform]="'rotate('+ (sort.order == 'asc' ? 180 : 0) +'deg)'" class="ti-angle-down"></a>
+</div>
