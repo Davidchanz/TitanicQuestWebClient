@@ -3,13 +3,17 @@ import {FormsModule} from "@angular/forms";
 import {SearchGuess} from "../../model/search/SearchGuess";
 import {Router, RouterLink} from "@angular/router";
 import {SearchService} from "../../service/search/SearchService";
+import {OkPanelComponent} from "../panel/ok-panel/ok-panel.component";
+import {ErrorPanelComponent} from "../panel/error-panel/error-panel.component";
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
     FormsModule,
-    RouterLink
+    RouterLink,
+    OkPanelComponent,
+    ErrorPanelComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'

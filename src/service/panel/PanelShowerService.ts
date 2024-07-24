@@ -1,29 +1,38 @@
 import {Injectable} from "@angular/core";
+import {OkPanelComponent} from "../../component/panel/ok-panel/ok-panel.component";
+import {ErrorPanelComponent} from "../../component/panel/error-panel/error-panel.component";
 
 @Injectable({
   providedIn: "root",
 })
 export class PanelShowerService {
+  okPanelComponent!: OkPanelComponent
+  errorPanelComponent!: ErrorPanelComponent;
+
+  setOkComponent(okPanelComponent: OkPanelComponent){
+    this.okPanelComponent = okPanelComponent;
+  }
+
+  setErrorComponent(errorPanelComponent: ErrorPanelComponent){
+    this.errorPanelComponent = errorPanelComponent;
+  }
 
   showOkPanel(message: string) {
-    let okLabel = window.document.getElementById("ok-label");
-    okLabel!.style.transform = "translateY(0%)";
-    let description = window.document.getElementById("ok-description");
-    description!.textContent = message;
+    this.okPanelComponent.setState('', message)
+    this.okPanelComponent.show();
+
     let id = setInterval(() => {
-      okLabel!.style.transform = "translateY(-100%)";
+      this.okPanelComponent.hide();
       clearInterval(id);
     }, 5000)
   }
 
   showErrorPanel(errorsDescription: string, hide:boolean){
-    let errorLabel = window.document.getElementById("error-label");
-    errorLabel!.style.transform = "translateY(0%)";
-    let description = window.document.getElementById("error-description");
-    description!.textContent = errorsDescription;
+    this.errorPanelComponent.setState(errorsDescription)
+    this.errorPanelComponent.show();
     if(hide) {
       let id = setInterval(() => {
-        errorLabel!.style.transform = "translateY(-110%)";
+        this.errorPanelComponent.hide();
         clearInterval(id);
       }, 5000)
     }

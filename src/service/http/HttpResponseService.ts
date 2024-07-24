@@ -1,7 +1,6 @@
 import {Observable, Subscription, TimeoutError} from "rxjs";
 import {Directive} from "@angular/core";
 import {ApiError} from "../../model/error/ApiError";
-import {Router} from "@angular/router";
 import {injector} from "../../config/Injector";
 import {PanelShowerService} from "../panel/PanelShowerService";
 
@@ -14,7 +13,6 @@ export class HttpResponseService<T>{
   subscribe(observerOrNext: ((value: T) => void), errorNext?: (err: any) => void): Subscription {
 
     return this.observable.subscribe({next: observerOrNext, error: (err)=>{
-        let router = injector().get(Router);
         let panelShower = injector().get(PanelShowerService);
         if(errorNext != null){
           errorNext(err)
