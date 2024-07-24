@@ -68,6 +68,12 @@ export class TitanicQuestComponent extends SortPageSearchBasic {
   }
 
   getItems(){
+    const paramPageSize = this.route.snapshot.queryParams['pageSize'];
+    if(paramPageSize == null)
+      this.pageSize = 50;
+    else
+      this.pageSize = paramPageSize;
+
     this.passengerService.getPassengers(this.pagination, this.pageSize, this.sorting,
       this.searchRequest, this.filters)
       .subscribe(value => {
@@ -83,9 +89,13 @@ export class TitanicQuestComponent extends SortPageSearchBasic {
   }
 
   changePageSize() {
-    this.router.navigate([], {skipLocationChange: true,
+    this.router.navigate([], {
       queryParams: {pageSize: this.pageSize},
       queryParamsHandling: "merge"
+    }).then(value => {
+      this.paginationComponent.getPagination(() => {
+        this.getItems()
+      })
     })
   }
 }
