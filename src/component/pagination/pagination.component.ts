@@ -17,6 +17,7 @@ export class PaginationComponent implements OnInit{
   @Input() url!: string;
   @Output() pageChanged = new EventEmitter <number>();
   searchRequest: string = '';
+  pageSize: number = 0;
   @Input() filters!: Filters;
 
   constructor(private router: Router,
@@ -26,14 +27,20 @@ export class PaginationComponent implements OnInit{
   }
 
   getPagination(after: () => void = ()=>{}){
-    const param = this.route.snapshot.queryParams['searchRequest'];
-    if(param == null)
+    const paramSearchRequest = this.route.snapshot.queryParams['searchRequest'];
+    if(paramSearchRequest == null)
       this.searchRequest = "";
     else
-      this.searchRequest = param;
+      this.searchRequest = paramSearchRequest;
+
+    const paramPageSize = this.route.snapshot.queryParams['pageSize'];
+    if(paramPageSize == null)
+      this.pageSize = 50;
+    else
+      this.pageSize = paramPageSize;
 
     this.paginationService.getPagination(this.url, this.searchRequest,
-      this.activePage.number, this.filters)
+      this.activePage.number, this.pageSize, this.filters)
       .subscribe(value => {
       this.pagination = value.pagination;
       if(this.pagination.length > 0) {

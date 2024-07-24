@@ -11,6 +11,8 @@ import {Filter} from "../../model/filter/Filter";
 import {Statistic} from "../../model/statistic/Statistic";
 import {Statistics} from "../../model/statistic/Statisctics";
 import {StatisticComponent} from "../statistic/statistic.component";
+import {FormsModule} from "@angular/forms";
+import {NumberSpinEditDirective} from "../../directives/number-spin-edit.directive";
 
 @Component({
   selector: 'app-titanic-quest',
@@ -19,7 +21,9 @@ import {StatisticComponent} from "../statistic/statistic.component";
     PaginationComponent,
     SortingComponent,
     FilteringComponent,
-    StatisticComponent
+    StatisticComponent,
+    FormsModule,
+    NumberSpinEditDirective
   ],
   templateUrl: './titanic-quest.component.html',
   styleUrl: './titanic-quest.component.css'
@@ -28,12 +32,14 @@ export class TitanicQuestComponent extends SortPageSearchBasic {
   passengers?: Passengers
   filters: Filters;
   statistics: Statistics;
+  pageSize: number = 50;
 
   @ViewChild(PaginationComponent) paginationComponent!: PaginationComponent;
   @ViewChildren(StatisticComponent) statisticComponents!: Array<StatisticComponent>;
 
   constructor(private passengerService: PassengerService,
-              public override route: ActivatedRoute) {
+              public override route: ActivatedRoute,
+              private router: Router) {
     super(route)
 
     this.filters = new Filters([
@@ -62,7 +68,7 @@ export class TitanicQuestComponent extends SortPageSearchBasic {
   }
 
   getItems(){
-    this.passengerService.getPassengers(this.pagination, 50, this.sorting,
+    this.passengerService.getPassengers(this.pagination, this.pageSize, this.sorting,
       this.searchRequest, this.filters)
       .subscribe(value => {
         this.passengers = value
@@ -73,6 +79,13 @@ export class TitanicQuestComponent extends SortPageSearchBasic {
   filtering() {
     this.paginationComponent.getPagination(() => {
       this.getItems()
+    })
+  }
+
+  changePageSize() {
+    this.router.navigate([], {skipLocationChange: true,
+      queryParams: {pageSize: this.pageSize},
+      queryParamsHandling: "merge"
     })
   }
 }
