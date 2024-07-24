@@ -32,7 +32,9 @@ export class HeaderComponent {
 
   searchType() {
     this.searchRequest = this.searchRequest.trim()
-    if(this.searchRequest != '' && !this.searchRequest.includes("/")) {
+    if(this.searchRequest != ''
+      && !this.searchRequest.includes("/")
+      && this.router.url.split('?')[0] != '/') {
       this.searchService.getSearchResult(this.searchRequest, this.router.url.split('?')[0])
         .subscribe(searchGuess => {
           this.searchResults.results = searchGuess.results;
