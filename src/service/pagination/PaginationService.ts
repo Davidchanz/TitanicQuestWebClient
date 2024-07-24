@@ -10,11 +10,12 @@ import {Filters} from "../../model/filter/Filters";
 })
 export class PaginationService extends HttpRequestService{
 
-  getPagination(url: string, searchRequest: string, page: number, filters: Filters){
+  getPagination(url: string, searchRequest: string, page: number, pageSize: number, filters: Filters){
     const options = {
       params: new HttpParams()
         .set('searchRequest', searchRequest)
         .set('page', page)
+        .set('pageSize', pageSize)
     };
 
     let activeFilters = new Filters(filters.filters.filter(filter => filter.active))
